@@ -18,7 +18,7 @@ ChopraSSO is the iOS library to use Chopra Login for your app. Login or register
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Stylers' => 'tamas.szabo@stylersonline.com' }
-  s.source           = { :git => ‘git@github.com:stylers-llc/chopra-account-ios-sdk.git', :branch => swift-3 }
+  s.source           = { :git => 'git@github.com:stylers-llc/chopra-account-ios-sdk.git', :branch => 'swift-3' }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '8.0'
