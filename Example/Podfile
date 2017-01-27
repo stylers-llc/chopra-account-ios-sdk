@@ -7,6 +7,6 @@ target 'sso_test' do
 
   # Pods for sso_test
 
-	  pod 'ChopraSSO', :git => 'ssh://ors-kovacs@visszaszamolas.hu/var/git_staging/ios/deepak045_sso_sdk’
+	  pod 'ChopraSSO', :git => 'https://github.com/stylers-llc/chopra-account-ios-sdk.git’
 
 end
