@@ -6,7 +6,6 @@ target 'sso_test' do
   use_frameworks!
 
   # Pods for sso_test
-
-	  pod 'ChopraSSO', :git => 'git@github.com:stylers-llc/chopra-account-ios-sdk.git’, :branch => 'swift-3'
+  pod 'ChopraSSO', :git => 'git@github.com:stylers-llc/chopra-account-ios-sdk.git'
 
 end

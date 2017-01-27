@@ -1,21 +1,21 @@
 PODS:
-  - ChopraSSO (0.1.0)
+  - ChopraSSO (1.0.1)
 
 DEPENDENCIES:
-  - ChopraSSO (from `ssh://ors-kovacs@visszaszamolas.hu/var/git_staging/ios/deepak045_sso_sdk`)
+  - ChopraSSO (from `git@github.com:stylers-llc/chopra-account-ios-sdk.git`)
 
 EXTERNAL SOURCES:
   ChopraSSO:
-    :git: ssh://ors-kovacs@visszaszamolas.hu/var/git_staging/ios/deepak045_sso_sdk
+    :git: git@github.com:stylers-llc/chopra-account-ios-sdk.git
 
 CHECKOUT OPTIONS:
   ChopraSSO:
-    :commit: 4aa827026f521a24679b24d9de5232b60d3a5479
-    :git: ssh://ors-kovacs@visszaszamolas.hu/var/git_staging/ios/deepak045_sso_sdk
+    :commit: 42e19dfb9d0a81a0608fc36147004851907b978e
+    :git: git@github.com:stylers-llc/chopra-account-ios-sdk.git
 
 SPEC CHECKSUMS:
-  ChopraSSO: 29ba381b06d311946e15dc6825d0e7ba3e20821d
+  ChopraSSO: c2d03348ee163382a65f9544e8cfa6932c763fda
 
-PODFILE CHECKSUM: 0cc41e4f9e13ec9a83f5e69b342f4f65203b7a6c
+PODFILE CHECKSUM: 5351cb8e0f86cb1c50a6d7ce3142cc01535ff1f4
 
 COCOAPODS: 1.1.1
