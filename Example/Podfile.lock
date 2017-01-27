@@ -1,0 +1,21 @@
+PODS:
+  - ChopraSSO (0.1.0)
+
+DEPENDENCIES:
+  - ChopraSSO (from `ssh://ors-kovacs@visszaszamolas.hu/var/git_staging/ios/deepak045_sso_sdk`)
+
+EXTERNAL SOURCES:
+  ChopraSSO:
+    :git: ssh://ors-kovacs@visszaszamolas.hu/var/git_staging/ios/deepak045_sso_sdk
+
+CHECKOUT OPTIONS:
+  ChopraSSO:
+    :commit: 4aa827026f521a24679b24d9de5232b60d3a5479
+    :git: ssh://ors-kovacs@visszaszamolas.hu/var/git_staging/ios/deepak045_sso_sdk
+
+SPEC CHECKSUMS:
+  ChopraSSO: 29ba381b06d311946e15dc6825d0e7ba3e20821d
+
+PODFILE CHECKSUM: 0cc41e4f9e13ec9a83f5e69b342f4f65203b7a6c
+
+COCOAPODS: 1.1.1

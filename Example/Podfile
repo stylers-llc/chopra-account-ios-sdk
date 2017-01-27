@@ -1,0 +1,12 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'sso_test' do
+  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for sso_test
+
+	  pod 'ChopraSSO', :git => 'ssh://ors-kovacs@visszaszamolas.hu/var/git_staging/ios/deepak045_sso_sdk’
+
+end
