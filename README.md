@@ -22,7 +22,7 @@ pod "ChopraSSO"
 
 ## Author
 
-Stylers, tamas.szabo@stylersonline.com
+Stylers
 
 ## License
 
