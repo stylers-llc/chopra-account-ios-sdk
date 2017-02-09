@@ -10,11 +10,11 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   ChopraSSO:
-    :commit: 42e19dfb9d0a81a0608fc36147004851907b978e
+    :commit: c82ea57e5a2209aa82b2c938951ab168bbda0c14
     :git: git@github.com:stylers-llc/chopra-account-ios-sdk.git
 
 SPEC CHECKSUMS:
-  ChopraSSO: c2d03348ee163382a65f9544e8cfa6932c763fda
+  ChopraSSO: 777433126c0a3da61954be7afd93253e883640d5
 
 PODFILE CHECKSUM: c1575e64388064afb602ebf90ec3ec1df91107d5
 
