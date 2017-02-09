@@ -208,12 +208,22 @@ UIView *contentView;
     [webView setHidden:NO];
     [activityIndicator stopAnimating];
     
-    NSString *currentURL = webView.request.URL.absoluteString;
+    NSString *currentURL = webView.request.URL.query;
     currentURL = [currentURL stringByRemovingPercentEncoding];
     
     if ([currentURL containsString:@"sso_code"] && _completionHandler) {
         
-        NSString *ssoCode = [currentURL substringFromIndex:(baseUrl.length+28)];
+        NSString *url = [currentURL stringByReplacingOccurrencesOfString:@"#" withString:@"&"];
+        
+        NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
+        for (NSString *param in [url componentsSeparatedByString:@"&"]) {
+            NSArray *elts = [param componentsSeparatedByString:@"="];
+            if([elts count] < 2) continue;
+            [params setObject:[elts objectAtIndex:1] forKey:[elts firstObject]];
+        }
+        
+        NSString *ssoCode = [params objectForKey:@"sso_code"];
+
         NSData *decodedData = [NSData base64DataFromString2:ssoCode];
         
         NSString *base64Decoded = [[NSString alloc] initWithData:decodedData encoding:[NSString defaultCStringEncoding]];

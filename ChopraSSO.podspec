@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ChopraSSO'
-  s.version          = '1.0.0'
+  s.version          = '1.0.1'
   s.summary          = 'ChopraSSO is the iOS library to use Chopra Login for your app'
   s.description      = <<-DESC
 ChopraSSO is the iOS library to use Chopra Login for your app. Login or register with email, facebook, google.
