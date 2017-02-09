@@ -209,7 +209,6 @@ UIView *contentView;
     [activityIndicator stopAnimating];
     
     NSString *currentURL = webView.request.URL.query;
-    currentURL = [currentURL stringByRemovingPercentEncoding];
     
     if ([currentURL containsString:@"sso_code"] && _completionHandler) {
         
@@ -222,7 +221,7 @@ UIView *contentView;
             [params setObject:[elts objectAtIndex:1] forKey:[elts firstObject]];
         }
         
-        NSString *ssoCode = [params objectForKey:@"sso_code"];
+        NSString *ssoCode = [[params objectForKey:@"sso_code"] stringByRemovingPercentEncoding];
 
         NSData *decodedData = [NSData base64DataFromString2:ssoCode];
         

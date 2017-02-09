@@ -1,5 +1,5 @@
 PODS:
-  - ChopraSSO (1.0.1)
+  - ChopraSSO (1.0.2)
 
 DEPENDENCIES:
   - ChopraSSO (from `git@github.com:stylers-llc/chopra-account-ios-sdk.git`)
@@ -10,11 +10,11 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   ChopraSSO:
-    :commit: c82ea57e5a2209aa82b2c938951ab168bbda0c14
+    :commit: ca5867fe695bf2309f087fda6d20e33ac147abe6
     :git: git@github.com:stylers-llc/chopra-account-ios-sdk.git
 
 SPEC CHECKSUMS:
-  ChopraSSO: 777433126c0a3da61954be7afd93253e883640d5
+  ChopraSSO: fea8e56a79516a9eeccb3c5112de6cc0cc48c257
 
 PODFILE CHECKSUM: c1575e64388064afb602ebf90ec3ec1df91107d5
 
