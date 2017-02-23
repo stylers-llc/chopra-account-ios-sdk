@@ -194,6 +194,7 @@ UIView *contentView;
     _completionHandler = nil;
     closeButton.image = [self loadImageFromResourceBundle:@"icon_default.png"];
     [webView stopLoading];
+    webView.delegate = nil;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -247,6 +248,7 @@ UIView *contentView;
         _completionHandler = nil;
         
         [webView stopLoading];
+        webView.delegate = nil;
         [self dismissViewControllerAnimated:YES completion:nil];
         
     }
