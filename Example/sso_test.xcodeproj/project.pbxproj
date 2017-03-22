@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		33117E6B44FE21A378C74EF1 /* Pods_sso_test.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D74BBA6C1FF7755E2A69F15 /* Pods_sso_test.framework */; };
+		5D0716CAEAF792F324FB9631 /* libPods-sso_test.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E8C05538DAA937D495EFE21 /* libPods-sso_test.a */; };
 		64EC6B941E37828E00F668D1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EC6B931E37828E00F668D1 /* AppDelegate.swift */; };
 		64EC6B961E37828E00F668D1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EC6B951E37828E00F668D1 /* ViewController.swift */; };
 		64EC6B991E37828E00F668D1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 64EC6B971E37828E00F668D1 /* Main.storyboard */; };
@@ -17,7 +17,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0D74BBA6C1FF7755E2A69F15 /* Pods_sso_test.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_sso_test.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		64EC6B901E37828E00F668D1 /* sso_test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sso_test.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		64EC6B931E37828E00F668D1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		64EC6B951E37828E00F668D1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -27,6 +26,7 @@
 		64EC6B9F1E37828E00F668D1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		64EC6BA51E37837500F668D1 /* sso_test-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "sso_test-Bridging-Header.h"; sourceTree = "<group>"; };
 		64EC6BA61E37837500F668D1 /* test.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = test.m; sourceTree = "<group>"; };
+		6E8C05538DAA937D495EFE21 /* libPods-sso_test.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-sso_test.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7AB088ADBB1FB41FEA69BFE1 /* Pods-sso_test.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sso_test.debug.xcconfig"; path = "Pods/Target Support Files/Pods-sso_test/Pods-sso_test.debug.xcconfig"; sourceTree = "<group>"; };
 		D6EE1E6572F4B7D9E5AB94CE /* Pods-sso_test.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-sso_test.release.xcconfig"; path = "Pods/Target Support Files/Pods-sso_test/Pods-sso_test.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -36,7 +36,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				33117E6B44FE21A378C74EF1 /* Pods_sso_test.framework in Frameworks */,
+				5D0716CAEAF792F324FB9631 /* libPods-sso_test.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,7 +88,7 @@
 		923B906813342B3A91B24AAA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				0D74BBA6C1FF7755E2A69F15 /* Pods_sso_test.framework */,
+				6E8C05538DAA937D495EFE21 /* libPods-sso_test.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

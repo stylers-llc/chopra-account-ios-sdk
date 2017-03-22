@@ -7,25 +7,52 @@
 //
 
 import UIKit
-import ChopraSSO
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
-        view.backgroundColor = UIColor.red
-        
-        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapped(_:))))
     }
     
-    func tapped(_ sender: UITapGestureRecognizer?) {
+    @IBAction func webTouched(_ sender: UIButton?) {
         let chopra = ChopraLoginViewController()
         
         chopra.setLoginBaseUrl(ServerProxyConstants.authUrl, apiUrl: ServerProxyConstants.authApiUrl, apiKey: ServerProxyConstants.authApiKey, clientKey: ServerProxyConstants.clientKey, platform: ServerProxyConstants.authPlatform, nameSpace: ServerProxyConstants.namespace, clientSecret: ServerProxyConstants.clientSecret)
         
         chopra.showEmailLoginView(from: self) { (uId, uToken) -> Void in
+            
+            if let uToken = uToken {
+                chopra.getChopraAccount(byUserKey: uToken, withHandler: { (chopraAccount) -> Void in
+                    let acc = chopraAccount
+                    print(acc?.gender)
+                })
+            }
+        }
+    }
+    
+    @IBAction func facebookTouched(_ sender: UIButton?) {
+        let chopra = ChopraLoginViewController()
+        
+        chopra.setLoginBaseUrl(ServerProxyConstants.authUrl, apiUrl: ServerProxyConstants.authApiUrl, apiKey: ServerProxyConstants.authApiKey, clientKey: ServerProxyConstants.clientKey, platform: ServerProxyConstants.authPlatform, nameSpace: ServerProxyConstants.namespace, clientSecret: ServerProxyConstants.clientSecret)
+        
+        chopra.loginWithFacebook(from: self) { (uId, uToken) -> Void in
+            
+            if let uToken = uToken {
+                chopra.getChopraAccount(byUserKey: uToken, withHandler: { (chopraAccount) -> Void in
+                    let acc = chopraAccount
+                    print(acc?.gender)
+                })
+            }
+        }
+    }
+    
+    @IBAction func googleTouched(_ sender: UIButton?) {
+        let chopra = ChopraLoginViewController()
+        
+        chopra.setLoginBaseUrl(ServerProxyConstants.authUrl, apiUrl: ServerProxyConstants.authApiUrl, apiKey: ServerProxyConstants.authApiKey, clientKey: ServerProxyConstants.clientKey, platform: ServerProxyConstants.authPlatform, nameSpace: ServerProxyConstants.namespace, clientSecret: ServerProxyConstants.clientSecret)
+        
+        chopra.loginWithGoogle(from: self) { (uId, uToken) -> Void in
             
             if let uToken = uToken {
                 chopra.getChopraAccount(byUserKey: uToken, withHandler: { (chopraAccount) -> Void in

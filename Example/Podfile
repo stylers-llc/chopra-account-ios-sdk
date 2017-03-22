@@ -3,9 +3,9 @@
 
 target 'sso_test' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
-  use_frameworks!
+  # use_frameworks!
 
   # Pods for sso_test
-  pod 'ChopraSSO', :git => 'git@github.com:stylers-llc/chopra-account-ios-sdk.git'
-
+  # pod 'ChopraSSO', :git => 'git@github.com:stylers-llc/chopra-account-ios-sdk.git'
+  pod 'ChopraSSO', :path => '../../chopra-account-ios-sdk/'
 end

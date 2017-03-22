@@ -1,21 +1,56 @@
 PODS:
-  - ChopraSSO (1.0.3)
+  - Bolts (1.8.4):
+    - Bolts/AppLinks (= 1.8.4)
+    - Bolts/Tasks (= 1.8.4)
+  - Bolts/AppLinks (1.8.4):
+    - Bolts/Tasks
+  - Bolts/Tasks (1.8.4)
+  - ChopraSSO (1.1.0):
+    - FBSDKCoreKit (<= 4.20)
+    - FBSDKLoginKit (<= 4.20)
+    - GoogleSignIn
+  - FBSDKCoreKit (4.20.0):
+    - Bolts (~> 1.7)
+  - FBSDKLoginKit (4.20.0):
+    - FBSDKCoreKit
+  - GoogleSignIn (4.0.2):
+    - GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)
+    - GoogleToolboxForMac/NSString+URLArguments (~> 2.1)
+    - GTMOAuth2 (~> 1.0)
+    - GTMSessionFetcher/Core (~> 1.1)
+  - GoogleToolboxForMac/DebugUtils (2.1.1):
+    - GoogleToolboxForMac/Defines (= 2.1.1)
+  - GoogleToolboxForMac/Defines (2.1.1)
+  - GoogleToolboxForMac/NSDictionary+URLArguments (2.1.1):
+    - GoogleToolboxForMac/DebugUtils (= 2.1.1)
+    - GoogleToolboxForMac/Defines (= 2.1.1)
+    - GoogleToolboxForMac/NSString+URLArguments (= 2.1.1)
+  - GoogleToolboxForMac/NSString+URLArguments (2.1.1)
+  - GTMOAuth2 (1.1.4):
+    - GTMSessionFetcher (~> 1.1)
+  - GTMSessionFetcher (1.1.9):
+    - GTMSessionFetcher/Full (= 1.1.9)
+  - GTMSessionFetcher/Core (1.1.9)
+  - GTMSessionFetcher/Full (1.1.9):
+    - GTMSessionFetcher/Core (= 1.1.9)
 
 DEPENDENCIES:
-  - ChopraSSO (from `git@github.com:stylers-llc/chopra-account-ios-sdk.git`)
+  - ChopraSSO (from `../../chopra-account-ios-sdk/`)
 
 EXTERNAL SOURCES:
   ChopraSSO:
-    :git: git@github.com:stylers-llc/chopra-account-ios-sdk.git
-
-CHECKOUT OPTIONS:
-  ChopraSSO:
-    :commit: 07da072e3a34ff9714041f773d73f2340f6bd101
-    :git: git@github.com:stylers-llc/chopra-account-ios-sdk.git
+    :path: "../../chopra-account-ios-sdk/"
 
 SPEC CHECKSUMS:
-  ChopraSSO: 8d20a685286616e1198936a880e2c3b80cadecbf
+  Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
+  ChopraSSO: 551bd730fa67c56273a0e35ac0a5b815f4a2cfa5
+  FBSDKCoreKit: 2d16979b28fe28c2b95af0d275ad5f9703c6c8de
+  FBSDKLoginKit: a9d9391506c687e2304a590bf9312837fce7f375
+  GoogleSignIn: d7ad83f13480e1f30453471d00d19b5293ac46af
+  GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
+  GTMOAuth2: 7fc9c10f5c745f4d9850419ea88889fe3baa6b7d
+  GTMSessionFetcher: 5c046c76a1f859bc9c187e918f18e4fc7bb57b5e
 
-PODFILE CHECKSUM: c1575e64388064afb602ebf90ec3ec1df91107d5
+PODFILE CHECKSUM: bbb3e6aa72111bbfea081374027e534a00a604ca
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.2.0

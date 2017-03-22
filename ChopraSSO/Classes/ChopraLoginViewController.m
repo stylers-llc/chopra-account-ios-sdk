@@ -11,6 +11,9 @@
 #import "BBAES.h"
 #import "RTSerializer.h"
 #import "CryptLib.h"
+#import "FacebookHelper.h"
+#import "GoogleHelper.h"
+#import "ChopraSSO.h"
 #import <CommonCrypto/CommonCrypto.h>
 
 @interface ChopraLoginViewController ()
@@ -39,6 +42,7 @@ UIWebView *webView;
 UIImageView *closeButton;
 UIActivityIndicatorView *activityIndicator;
 UIView *contentView;
+BOOL _registration = NO;
 
 -(void) setLoginBaseUrl:(NSString*)_baseUrl apiUrl:(NSString*)_apiUrl apiKey:(NSString*)_apiKey clientKey:(NSString*)_clientKey platform:(NSString*)_platform
               nameSpace:(NSString*)_nameSpace clientSecret:(NSString*)_clientSecret{
@@ -75,6 +79,35 @@ UIView *contentView;
     [rootViewController presentViewController:self animated:YES completion: nil];
     _completionHandler = [handler copy];
     
+}
+
+- (void) showRegistrationViewFrom:(UIViewController*)rootViewController withHandler:(void(^)(NSString*,NSString*))handler {
+    
+    _registration = YES;
+    
+    [self showEmailLoginViewFrom:rootViewController withHandler:handler];
+    
+}
+
+- (void) loginWithFacebookFrom:(UIViewController*)rootViewController withHandler:(void(^)(NSString*,NSString*))handler {
+    [[FacebookHelper sharedInstance] loginFrom:rootViewController withHandler:^(Boolean success, NSString *userId, NSString *userToken) {
+        if (success) {
+            [self showSocialLoginViewFrom:rootViewController socialToken:userToken socialId:userId socialType:ChopraLoginTypeFacebook withHandler:handler];
+        } else {
+            // TODO: error
+        }
+    }];
+}
+
+- (void) loginWithGoogleFrom:(UIViewController*)rootViewController withHandler:(void(^)(NSString*,NSString*))handler {
+    [GoogleHelper sharedInstance].clientID = ChopraSSO.googleClientID;
+    [[GoogleHelper sharedInstance] loginFrom:rootViewController withHandler:^(Boolean success, NSString *userId, NSString *userToken) {
+        if (success) {
+            [self showSocialLoginViewFrom:rootViewController socialToken:userToken socialId:userId socialType:ChopraLoginTypeGoogle withHandler:handler];
+        } else {
+            // TODO: error
+        }
+    }];
 }
 
 - (void)viewDidLoad {
@@ -150,11 +183,14 @@ UIView *contentView;
 -(void)viewWillAppear:(BOOL)animated{
     [[NSURLCache sharedURLCache] removeAllCachedResponses];
     
-    NSString *url=baseUrl;
-    if (socialToken!=nil && socialToken.length>0){
+    NSString *url = baseUrl;
+    if (socialToken != nil && socialToken.length > 0){
         url =[url stringByAppendingString:@"/social/tokenauth?client_key="];
-    } else {
+    } else if (!_registration){
         url =[url stringByAppendingString:@"/tokenauth?client_key="];
+    } else {
+        url =[url stringByAppendingString:@"/tokenauth/registration?client_key="];
+        _registration = NO;
     }
     url = [url stringByAppendingString:clientKey];
     url = [url stringByAppendingString:@"&platform_type="];
@@ -195,6 +231,9 @@ UIView *contentView;
     closeButton.image = [self loadImageFromResourceBundle:@"icon_default.png"];
     [webView stopLoading];
     webView.delegate = nil;
+    
+    socialToken = nil;
+    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -250,6 +289,8 @@ UIView *contentView;
         [webView stopLoading];
         webView.delegate = nil;
         [self dismissViewControllerAnimated:YES completion:nil];
+        
+        socialToken = nil;
         
     }
     
@@ -369,7 +410,6 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
 
 - (void) logout:(NSString*)_ssoToken{
 
-    
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     [request setURL:[NSURL URLWithString:[apiUrl stringByAppendingString:@"/auth"]]];
     [request setHTTPMethod:@"DELETE"];
@@ -395,12 +435,10 @@ NSString *letters = @"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ012345
 - (UIImage *) loadImageFromResourceBundle:(NSString *)imageName
 {
     NSBundle *bundle = [ChopraLoginViewController getResourcesBundle];
-    NSString *imageFileName = [NSString stringWithFormat:@"%@.png",imageName];
+    NSString *imageFileName = [NSString stringWithFormat:@"%@",imageName];
     UIImage *image = [UIImage imageNamed:imageFileName inBundle:bundle compatibleWithTraitCollection:nil];
     return image;
 }
-
-
 
 /*
 #pragma mark - Navigation

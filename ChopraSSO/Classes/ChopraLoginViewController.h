@@ -11,13 +11,22 @@
 
 @interface ChopraLoginViewController : UIViewController <UIWebViewDelegate>
 
+typedef enum {
+    ChopraLoginTypeGoogle,
+    ChopraLoginTypeFacebook,
+    ChopraLoginTypeEmail
+} ChopraLoginType;
+
 -(void) setLoginBaseUrl:(NSString*)_baseUrl apiUrl:(NSString*)_apiUrl apiKey:(NSString*)_apiKey clientKey:(NSString*)_clientKey platform:(NSString*)_platform
               nameSpace:(NSString*)_nameSpace clientSecret:(NSString*)_clientSecret;
 
 - (void) showEmailLoginViewFrom:(UIViewController*)rootViewController withHandler:(void(^)(NSString*,NSString*))handler;
 
-- (void) showSocialLoginViewFrom:(UIViewController*)rootViewController socialToken:(NSString*)_socialToken
-                        socialId:(NSString*)_socialId socialType:(int) _socialType withHandler:(void(^)(NSString*,NSString*))handler;
+- (void) showRegistrationViewFrom:(UIViewController*)rootViewController withHandler:(void(^)(NSString*,NSString*))handler;
+
+- (void) loginWithFacebookFrom:(UIViewController*)rootViewController withHandler:(void(^)(NSString*,NSString*))handler;
+
+- (void) loginWithGoogleFrom:(UIViewController*)rootViewController withHandler:(void(^)(NSString*,NSString*))handler;
 
 - (void) getChopraAccountByUserKey:(NSString*)_uKey withHandler:(void(^)(ChopraAccount*))handler;
 

@@ -6,5 +6,16 @@
 //
 //
 
+#import <Foundation/Foundation.h>
 #import "ChopraAccount.h"
 #import "ChopraLoginViewController.h"
+
+@interface ChopraSSO : NSObject
+
++ (NSString*) googleClientID;
++ (void)setGoogleClientID:(NSString *)googleClientID;
+
++ (BOOL)application:(UIApplication *)app
+            openURL:(NSURL *)url
+            options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options;
+@end
