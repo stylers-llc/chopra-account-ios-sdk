@@ -28,7 +28,16 @@ static NSString* _googleClientID;
 + (BOOL)application:(UIApplication *)app
             openURL:(NSURL *)url
             options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
-    return [[FacebookHelper sharedInstance] application:app openURL:url options:options];
+    return [[FacebookHelper sharedInstance] application:app openURL:url options:options] ||
+            [[GoogleHelper sharedInstance] application:app openURL:url options:options];
+}
+
++ (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+            sourceApplication:(NSString *)sourceApplication
+            annotation:(id)annotation {
+    return [[FacebookHelper sharedInstance] application:application openURL:url sourceApplication:sourceApplication annotation:annotation] ||
+            [[GoogleHelper sharedInstance] application:application openURL:url sourceApplication:sourceApplication annotation:annotation];
 }
 
 @end

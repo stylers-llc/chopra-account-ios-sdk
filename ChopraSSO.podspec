@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ChopraSSO'
-  s.version          = '1.1.0'
+  s.version          = '1.1.1'
   s.summary          = 'ChopraSSO is the iOS library to use Chopra Login for your app'
   s.description      = <<-DESC
 ChopraSSO is the iOS library to use Chopra Login for your app. Login or register with email, facebook, google.
@@ -18,7 +18,7 @@ ChopraSSO is the iOS library to use Chopra Login for your app. Login or register
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Stylers' => 'tamas.szabo@stylersonline.com' }
-  s.source           = { :git => 'git@github.com:stylers-llc/chopra-account-ios-sdk.git', :branch => 'develop', :tag => 'v1.1.0' }
+  s.source           = { :git => 'git@github.com:stylers-llc/chopra-account-ios-sdk.git', :branch => 'develop', :tag => 'v1.1.1' }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '7.0'
