@@ -34,6 +34,6 @@ ChopraSSO is the iOS library to use Chopra Login for your app. Login or register
   
   s.dependency 'FBSDKCoreKit', '<= 4.20'
   s.dependency 'FBSDKLoginKit', '<= 4.20'
-  s.dependency 'GoogleSignIn', '<= 4.0.2'
+  s.dependency 'GoogleSignIn', '<= 4.1.2'
 
 end
