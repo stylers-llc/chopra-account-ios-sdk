@@ -24,7 +24,7 @@ class ViewController: UIViewController {
     @IBAction func googleTouched(_ sender: Any) {
         let chopra = ChopraLoginViewController()
         
-        chopra.setLogin(baseUrl: ServerProxyConstants.authUrl, apiUrl: ServerProxyConstants.authApiUrl, apiKey: ServerProxyConstants.authApiKey, clientKey: ServerProxyConstants.clientKey, platform: ServerProxyConstants.authPlatform, namespace: ServerProxyConstants.namespace, clientSecret: ServerProxyConstants.clientSecret)
+        chopra.setLoginBaseUrl(ServerProxyConstants.authUrl, apiUrl: ServerProxyConstants.authApiUrl, apiKey: ServerProxyConstants.authApiKey, clientKey: ServerProxyConstants.clientKey, platform: ServerProxyConstants.authPlatform, namespace: ServerProxyConstants.namespace, clientSecret: ServerProxyConstants.clientSecret)
         
         chopra.loginWithGoogle(from: self) { (uId, uToken) -> Void in
             chopra.getChopraAccount(uToken, completionHandler: { (chopraAccount) -> Void in
@@ -40,7 +40,7 @@ class ViewController: UIViewController {
     @IBAction func facebookTouched(_ sender: Any) {
         let chopra = ChopraLoginViewController()
         
-        chopra.setLogin(baseUrl: ServerProxyConstants.authUrl, apiUrl: ServerProxyConstants.authApiUrl, apiKey: ServerProxyConstants.authApiKey, clientKey: ServerProxyConstants.clientKey, platform: ServerProxyConstants.authPlatform, namespace: ServerProxyConstants.namespace, clientSecret: ServerProxyConstants.clientSecret)
+        chopra.setLoginBaseUrl(ServerProxyConstants.authUrl, apiUrl: ServerProxyConstants.authApiUrl, apiKey: ServerProxyConstants.authApiKey, clientKey: ServerProxyConstants.clientKey, platform: ServerProxyConstants.authPlatform, namespace: ServerProxyConstants.namespace, clientSecret: ServerProxyConstants.clientSecret)
         
         chopra.loginWithFacebook(from: self) { (uId, uToken) -> Void in
             chopra.getChopraAccount(uToken, completionHandler: { (chopraAccount) -> Void in
@@ -55,7 +55,7 @@ class ViewController: UIViewController {
     @IBAction func webTouched(_ sender: Any) {
         let chopra = ChopraLoginViewController()
         
-        chopra.setLogin(baseUrl: ServerProxyConstants.authUrl, apiUrl: ServerProxyConstants.authApiUrl, apiKey: ServerProxyConstants.authApiKey, clientKey: ServerProxyConstants.clientKey, platform: ServerProxyConstants.authPlatform, namespace: ServerProxyConstants.namespace, clientSecret: ServerProxyConstants.clientSecret)
+        chopra.setLoginBaseUrl(ServerProxyConstants.authUrl, apiUrl: ServerProxyConstants.authApiUrl, apiKey: ServerProxyConstants.authApiKey, clientKey: ServerProxyConstants.clientKey, platform: ServerProxyConstants.authPlatform, namespace: ServerProxyConstants.namespace, clientSecret: ServerProxyConstants.clientSecret)
         
         chopra.loginWithEmail(from: self) { (uId, uToken) -> Void in
             chopra.getChopraAccount(uToken, completionHandler: { (chopraAccount) -> Void in

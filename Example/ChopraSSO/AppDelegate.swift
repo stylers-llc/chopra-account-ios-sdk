@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        ChopraSSO.googleClientId = "345671575143-336bijlgtk9491k7detqu8u3ae61s9sq.apps.googleusercontent.com"
+        ChopraSSO.setGoogleClientID("345671575143-336bijlgtk9491k7detqu8u3ae61s9sq.apps.googleusercontent.com")
         
         return true
     }

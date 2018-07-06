@@ -31,7 +31,7 @@ public class ChopraLoginViewController: UIViewController {
     var socialId: String?
     var loginType: ChopraLoginType?
     
-    var completionHandler: ((Int?, String?) -> Void)?
+    var completionHandler: ((String?, String?) -> Void)?
     
     var webView: WKWebView?
     var closeButton: UIImageView?
@@ -40,7 +40,7 @@ public class ChopraLoginViewController: UIViewController {
     
     var isRegistration: Bool = false
     
-    public func setLogin(baseUrl: String, apiUrl: String, apiKey: String, clientKey: String, platform: String, namespace: String, clientSecret: String) {
+    public func setLoginBaseUrl(_ baseUrl: String, apiUrl: String, apiKey: String, clientKey: String, platform: String, namespace: String, clientSecret: String) {
         self.baseUrl = baseUrl
         self.apiUrl = apiUrl
         self.apiKey = apiKey
@@ -50,7 +50,7 @@ public class ChopraLoginViewController: UIViewController {
         self.clientSecret = clientSecret
     }
     
-    func showSocialLoginView(from rootViewController: UIViewController, socialToken: String, socialId: String, socialType: ChopraLoginType, withHandler completionHandler: @escaping ((Int?, String?) -> Void)) {
+    public func showSocialLoginView(from rootViewController: UIViewController, socialToken: String, socialId: String, socialType: ChopraLoginType, withHandler completionHandler: @escaping ((String?, String?) -> Void)) {
         
         self.socialToken = socialToken
         self.socialId = socialId
@@ -62,7 +62,7 @@ public class ChopraLoginViewController: UIViewController {
         self.completionHandler = completionHandler
     }
     
-    func showEmailLoginView(from rootViewController: UIViewController, withHandler completionHandler: @escaping ((Int?, String?) -> Void)) {
+    public func showEmailLoginView(from rootViewController: UIViewController, withHandler completionHandler: @escaping ((String?, String?) -> Void)) {
         
         self.loginType = ChopraLoginType.email
         
@@ -72,19 +72,19 @@ public class ChopraLoginViewController: UIViewController {
         self.completionHandler = completionHandler
     }
     
-    public func showRegistrationView(from rootViewController: UIViewController, withHandler completionHandler: @escaping ((Int?, String?) -> Void)) {
+    public func showRegistrationView(from rootViewController: UIViewController, withHandler completionHandler: @escaping ((String?, String?) -> Void)) {
         
         self.isRegistration = true
         
         self.showEmailLoginView(from: rootViewController, withHandler: completionHandler)
     }
     
-    public func loginWithEmail(from rootViewController: UIViewController, withHandler completionHandler: @escaping ((Int?, String?) -> Void)) {
+    public func loginWithEmail(from rootViewController: UIViewController, withHandler completionHandler: @escaping ((String?, String?) -> Void)) {
         
         self.showEmailLoginView(from: rootViewController, withHandler: completionHandler)
     }
     
-    public func loginWithFacebook(from rootViewController: UIViewController, withHandler completionHandler: @escaping ((Int?, String?) -> Void)) {
+    public func loginWithFacebook(from rootViewController: UIViewController, withHandler completionHandler: @escaping ((String?, String?) -> Void)) {
         
         FacebookHelper.shared.login(from: rootViewController) { (success, userId, userToken) in
             if success, let userToken = userToken, let userId = userId {
@@ -93,9 +93,8 @@ public class ChopraLoginViewController: UIViewController {
         }
     }
 
-    public func loginWithGoogle(from rootViewController: UIViewController, withHandler completionHandler: @escaping ((Int?, String?) -> Void)) {
+    public func loginWithGoogle(from rootViewController: UIViewController, withHandler completionHandler: @escaping ((String?, String?) -> Void)) {
         
-        GoogleHelper.shared.uiDelegate = self
         GoogleHelper.shared.login(from: rootViewController) { (success, userId, userToken) in
             if success, let userToken = userToken, let userId = userId {
                 self.showSocialLoginView(from: rootViewController, socialToken: userToken, socialId: userId, socialType: ChopraLoginType.google, withHandler: completionHandler)
@@ -105,6 +104,25 @@ public class ChopraLoginViewController: UIViewController {
     
     public func getChopraAccount(_ ssoToken: String?, completionHandler: ((ChopraAccount?) -> Void)) {
         // completionHandler(ChopraAccount(json: JSON))
+    }
+    
+    public func logout(ssoToken: String) {
+        if let apiUrl = apiUrl, let url = URL(string: apiUrl + "/auth") {
+            var request = URLRequest(url: url)
+            request.httpMethod = "DELETE"
+            request.setValue(apiKey, forHTTPHeaderField: "X-SSO-ApiKey")
+            request.setValue(clientKey, forHTTPHeaderField: "X-SSO-ClientKey")
+            request.setValue(String(format: "Bearer %@", ssoToken), forHTTPHeaderField: "Authorization")
+            
+            let session = URLSession(configuration: URLSessionConfiguration.default, delegate: self, delegateQueue: nil)
+            session.dataTask(with: request, completionHandler: { (data, response, error) in
+                if let data = data {
+                    let requestReply = String(data: data, encoding: .utf8)
+                    print(String(format: "Logout response data: %@", requestReply ?? "unknown"))
+                }
+                print(String(format: "Logout response: %@", response ?? "unknown"))
+            }).resume()
+        }
     }
     
     // MARK: - Lifecycle
@@ -168,7 +186,6 @@ public class ChopraLoginViewController: UIViewController {
             let request = URLRequest(url: url)
             webView?.uiDelegate = self
             webView?.navigationDelegate = self
-            webView?.isHidden = false
             webView?.load(request)
         } else {
             // TODO
@@ -282,6 +299,10 @@ public class ChopraLoginViewController: UIViewController {
     }
 }
 
+extension ChopraLoginViewController: URLSessionDelegate {
+    
+}
+
 extension ChopraLoginViewController: GIDSignInUIDelegate {
     
 }
@@ -326,7 +347,10 @@ extension ChopraLoginViewController: WKNavigationDelegate, WKUIDelegate {
             guard let object = serializer.deserialize(decryptedMessage) as? [String: Any?] else {
                 return
             }
-            let userId = object["u_id"] as? Int
+            var userId: String? = nil
+            if let id = object["u_id"] as? Int {
+                userId = String(id)
+            }
             let userToken = object["api_token"]  as? String
             
             completionHandler?(userId, userToken)

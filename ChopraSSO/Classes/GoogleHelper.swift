@@ -20,12 +20,6 @@ class GoogleHelper: NSObject, SocialHelper, GIDSignInDelegate, GIDSignInUIDelega
     var rootViewController: UIViewController?
     var completionHandler: ((Bool, String?, String?) -> Void)?
     var isSilent: Bool = true
-    var uiDelegate: GIDSignInUIDelegate?
-//    {
-//        didSet {
-//            GIDSignIn.sharedInstance().uiDelegate = uiDelegate
-//        }
-//    }
     
     override init() {
         super.init()

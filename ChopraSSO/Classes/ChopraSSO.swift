@@ -8,10 +8,12 @@
 import Foundation
 
 public final class ChopraSSO {
-    public static var googleClientId: String? = nil {
-        didSet {
-            GoogleHelper.shared.clientId = googleClientId
-        }
+    public static var googleClientId: String? {
+        return GoogleHelper.shared.clientId
+    }
+    
+    public static func setGoogleClientID(_ newId: String?) {
+        GoogleHelper.shared.clientId = newId
     }
     
     public static func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
