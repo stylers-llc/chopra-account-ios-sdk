@@ -3,37 +3,47 @@
 # valid spec before submitting.
 #
 # Any lines starting with a # are optional, but their use is encouraged
-# To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html
+# To learn more about a Podspec see https://guides.cocoapods.org/syntax/podspec.html
 #
 
 Pod::Spec.new do |s|
   s.name             = 'ChopraSSO'
-  s.version          = '1.1.1'
-  s.summary          = 'ChopraSSO is the iOS library to use Chopra Login for your app'
+  s.version          = '2.0.0'
+  s.summary          = 'A short description of ChopraSSO.'
+
+# This description is used to generate tags and improve search results.
+#   * Think: What does it do? Why did you write it? What is the focus?
+#   * Try to keep it short, snappy and to the point.
+#   * Write the description between the DESC delimiters below.
+#   * Finally, don't worry about the indent, CocoaPods strips it!
+
   s.description      = <<-DESC
-ChopraSSO is the iOS library to use Chopra Login for your app. Login or register with email, facebook, google.
+TODO: Add long description of the pod here.
                        DESC
 
-  s.homepage         = 'https://account.chopra.com'
+  s.homepage         = 'https://github.com/encosw/ChopraSSO'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'Stylers' => 'tamas.szabo@stylersonline.com' }
-  s.source           = { :git => 'git@github.com:stylers-llc/chopra-account-ios-sdk.git', :branch => 'develop', :tag => 'v1.1.1' }
+  s.author           = { 'encosw' => 'kovacs.ors@encosoft.hu' }
+  s.source           = { :git => 'https://github.com/encosw/ChopraSSO.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target = '7.0'
+  s.ios.deployment_target = '9.0'
 
-  s.source_files = 'ChopraSSO/Classes/**/*'
+  s.source_files = 'ChopraSSO/Classes/*.swift'
   
   s.resource_bundles = {
     'ChopraSSO' => ['ChopraSSO/Assets/*.png']
   }
 
-  s.public_header_files = 'ChopraSSO/Classes/ChopraSSO.h', 'ChopraSSO/Classes/ChopraLoginViewController.h', 'ChopraSSO/Classes/ChopraAccount.h'
-  s.frameworks = 'UIKit', 'Foundation'
-  
-  s.dependency 'FBSDKCoreKit', '<= 4.20'
-  s.dependency 'FBSDKLoginKit', '<= 4.20'
-  s.dependency 'GoogleSignIn', '<= 4.1.2'
+#s.public_header_files = 'ChopraSSO/Classes/ChopraSSO.swift', 'ChopraSSO/Classes/ChopraLoginViewController.swift', 'ChopraSSO/Classes/ChopraAccount.swift'
+    s.frameworks = 'UIKit', 'Foundation'
+    s.static_framework = true
+
+    s.dependency 'FBSDKCoreKit', '<= 4.34.0'
+    s.dependency 'FBSDKLoginKit', '<= 4.34.0'
+    s.dependency 'GoogleSignIn', '<= 4.1.2'
+    s.dependency 'CryptoSwift', '<= 0.8.3'
+    s.dependency 'SwiftyJSON', '<= 4.1'
 
 end
