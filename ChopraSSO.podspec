@@ -30,7 +30,7 @@ TODO: Add long description of the pod here.
 
   s.ios.deployment_target = '9.0'
 
-  s.source_files = 'ChopraSSO/Classes/*.swift'
+  s.source_files = 'ChopraSSO/Classes/**/*.swift'
   
   s.resource_bundles = {
     'ChopraSSO' => ['ChopraSSO/Assets/*.png']
