@@ -40,13 +40,13 @@ public class ChopraLoginViewController: UIViewController {
     
     var isRegistration: Bool = false
     
-    public func setLoginBaseUrl(_ baseUrl: String, apiUrl: String, apiKey: String, clientKey: String, platform: String, namespace: String, clientSecret: String) {
+    public func setLoginBaseUrl(_ baseUrl: String?, apiUrl: String?, apiKey: String?, clientKey: String?, platform: String?, nameSpace: String?, clientSecret: String?) {
         self.baseUrl = baseUrl
         self.apiUrl = apiUrl
         self.apiKey = apiKey
         self.clientKey = clientKey
         self.platform = platform
-        self.namespace = namespace
+        self.namespace = nameSpace
         self.clientSecret = clientSecret
     }
     
@@ -106,8 +106,8 @@ public class ChopraLoginViewController: UIViewController {
         // completionHandler(ChopraAccount(json: JSON))
     }
     
-    public func logout(ssoToken: String) {
-        if let apiUrl = apiUrl, let url = URL(string: apiUrl + "/auth") {
+    public func logout(_ ssoToken: String?) {
+        if let ssoToken = ssoToken, let apiUrl = apiUrl, let url = URL(string: apiUrl + "/auth") {
             var request = URLRequest(url: url)
             request.httpMethod = "DELETE"
             request.setValue(apiKey, forHTTPHeaderField: "X-SSO-ApiKey")
