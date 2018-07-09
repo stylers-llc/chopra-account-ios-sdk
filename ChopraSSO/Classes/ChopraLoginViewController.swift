@@ -234,7 +234,7 @@ public class ChopraLoginViewController: UIViewController {
         let base64EncodedIv = ivData.base64EncodedString()
         
         guard let clientSecret = clientSecret,
-            let message = serializedString.data(using: .utf8), let encryptedTokenData = try? (try? AES(key: clientSecret, iv: ivString))?.encrypt(Array(message)),
+            let message = serializedString.data(using: .utf8), let encryptedTokenData = try? (try? AES(key: Array(clientSecret.utf8), blockMode: BlockMode.CBC(iv: Array(ivString.utf8))))?.encrypt(Array(message)),
             let encryptedTokenString = encryptedTokenData?.toBase64() else {
                 
             return nil
