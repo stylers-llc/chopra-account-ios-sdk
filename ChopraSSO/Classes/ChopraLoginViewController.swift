@@ -260,11 +260,14 @@ public class ChopraLoginViewController: UIViewController {
     }
     
     private func getHashEncription(key: String, data: String) -> String? {
-        guard let cKey: Array<Int8> = key.cString(using: .ascii),
-            let cData: Array<Int8> = data.cString(using: .ascii)
+        guard var cKey: Array<Int8> = key.cString(using: .ascii),
+            var cData: Array<Int8> = data.cString(using: .ascii)
         else {
                 return nil
         }
+        
+        cKey.popLast()
+        cData.popLast()
         
         var ucKey: Array<UInt8> = []
         var ucData: Array<UInt8> = []
@@ -275,7 +278,7 @@ public class ChopraLoginViewController: UIViewController {
         for char in cData {
             ucData.append(UInt8(bitPattern: char))
         }
-
+        
         let hmac: HMAC = HMAC(key: ucKey, variant: .sha256)
         let cHmac = (try? hmac.authenticate(ucData)) ?? []
         
