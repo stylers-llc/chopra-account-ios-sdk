@@ -10,6 +10,7 @@ import UIKit
 import WebKit
 import CryptoSwift
 import GoogleSignIn
+import SwiftyJSON
 
 public enum ChopraLoginType {
     case google
@@ -102,8 +103,44 @@ public class ChopraLoginViewController: UIViewController {
         }
     }
     
-    public func getChopraAccount(_ ssoToken: String?, completionHandler: ((ChopraAccount?) -> Void)) {
-        // completionHandler(ChopraAccount(json: JSON))
+    public func getChopraAccount(_ ssoToken: String?, completionHandler: @escaping ((ChopraAccount?) -> Void)) {
+        guard let ssoToken = ssoToken else {
+            completionHandler(nil)
+            return
+        }
+        
+        sendJSONRequest(ssoToken, completionHandler: completionHandler)
+    }
+    
+    public func sendJSONRequest(_ userToken: String?, completionHandler: @escaping ((ChopraAccount?) -> Void)) {
+        if let userToken = userToken, let apiUrl = apiUrl, let url = URL(string: apiUrl + "/auth") {
+            var request = URLRequest(url: url)
+            request.httpMethod = "GET"
+            request.setValue(apiKey, forHTTPHeaderField: "X-SSO-ApiKey")
+            request.setValue(clientKey, forHTTPHeaderField: "X-SSO-ClientKey")
+            request.setValue(String(format: "Bearer %@", userToken), forHTTPHeaderField: "Authorization")
+            
+            let session = URLSession(configuration: URLSessionConfiguration.default, delegate: self, delegateQueue: nil)
+            session.dataTask(with: request, completionHandler: { (data, response, error) in
+                if let data = data {
+                    let requestReply = String(data: data, encoding: .utf8)
+                    print(String(format: "Request reply data: %@", requestReply ?? "unknown"))
+                    
+                    if let jsonDictionary = ((try? JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions())) as? [String : Any?]) ?? nil {
+                        let json = JSON(jsonDictionary)
+                        if !json["error"].stringValue.isEmpty {
+                            completionHandler(nil)
+                        } else {
+                            let chopraAccount = ChopraAccount(json: json)
+                            completionHandler(chopraAccount)
+                        }
+                    } else {
+                        print("\nCannot convert data to a dictionary\n")
+                    }
+                }
+                print(String(format: "Request reply: %@", response ?? "unknown"))
+            }).resume()
+        }
     }
     
     public func logout(_ ssoToken: String?) {
