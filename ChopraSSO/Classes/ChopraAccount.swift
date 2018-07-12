@@ -12,7 +12,7 @@ public class ChopraAccount {
         self.profileImage = json["profileImage"].string
     }
     
-    init(coder aDecoder: NSCoder) {
+    public init(coder aDecoder: NSCoder) {
         self.id = aDecoder.decodeObject(forKey: "id") as? String
         self.firstName = aDecoder.decodeObject(forKey: "firstName") as? String
         self.lastName = aDecoder.decodeObject(forKey: "lastName") as? String
