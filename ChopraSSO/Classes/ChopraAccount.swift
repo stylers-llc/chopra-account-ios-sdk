@@ -12,6 +12,16 @@ public class ChopraAccount {
         self.profileImage = json["profileImage"].string
     }
     
+    init(coder aDecoder: NSCoder) {
+        self.id = aDecoder.decodeObject(forKey: "id") as? String
+        self.firstName = aDecoder.decodeObject(forKey: "firstName") as? String
+        self.lastName = aDecoder.decodeObject(forKey: "lastName") as? String
+        self.birthDate = aDecoder.decodeObject(forKey: "birthDate") as? String
+        self.email = aDecoder.decodeObject(forKey: "email") as? String
+        self.gender = aDecoder.decodeObject(forKey: "gender") as? String
+        self.profileImage = aDecoder.decodeObject(forKey: "profileImage") as? String
+    }
+    
     public var id: String?
     public var firstName: String?
     public var lastName: String?
