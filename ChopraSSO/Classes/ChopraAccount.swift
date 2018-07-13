@@ -3,13 +3,13 @@ import SwiftyJSON
 public class ChopraAccount {
     
     init(json: JSON) {
-        self.id = json["id"].string
-        self.firstName = json["firstName"].string
-        self.lastName = json["lastName"].string
-        self.birthDate = json["birthDate"].string
+        self.id = String(json["id"].int as! Int)
+        self.firstName = json["first_name"].string
+        self.lastName = json["last_name"].string
+        self.birthDate = json["birthdate"].string
         self.email = json["email"].string
         self.gender = json["gender"].string
-        self.profileImage = json["profileImage"].string
+        self.profileImage = json["profile_image"].string
     }
     
     public init(coder aDecoder: NSCoder) {
