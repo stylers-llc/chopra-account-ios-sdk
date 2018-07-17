@@ -90,6 +90,8 @@ public class ChopraLoginViewController: UIViewController {
         FacebookHelper.shared.login(from: rootViewController) { (success, userId, userToken) in
             if success, let userToken = userToken, let userId = userId {
                 self.showSocialLoginView(from: rootViewController, socialToken: userToken, socialId: userId, socialType: ChopraLoginType.facebook, withHandler: completionHandler)
+            } else {
+                completionHandler(nil, nil)
             }
         }
     }
@@ -99,6 +101,8 @@ public class ChopraLoginViewController: UIViewController {
         GoogleHelper.shared.login(from: rootViewController) { (success, userId, userToken) in
             if success, let userToken = userToken, let userId = userId {
                 self.showSocialLoginView(from: rootViewController, socialToken: userToken, socialId: userId, socialType: ChopraLoginType.google, withHandler: completionHandler)
+            } else {
+                completionHandler(nil, nil)
             }
         }
     }
@@ -177,7 +181,7 @@ public class ChopraLoginViewController: UIViewController {
         webView?.scrollView.bounces = false
         view.addSubview(webView!)
         
-        closeButton = UIImageView(image: UIImage(named: "icon_default.png") , highlightedImage: UIImage(named: "icon_pressed.png"))
+        closeButton = UIImageView(image: loadImageFromResourceBundle(named: "icon_default.png") , highlightedImage: loadImageFromResourceBundle(named: "icon_pressed.png"))
         closeButton?.frame = CGRect(x: view.frame.origin.x + 5, y: view.frame.origin.y + 25, width: 30, height: 30)
         closeButton?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(closeButtonTouch)))
         closeButton?.isMultipleTouchEnabled = true
@@ -252,7 +256,7 @@ public class ChopraLoginViewController: UIViewController {
         completionHandler?(nil, nil)
         completionHandler = nil
         
-        closeButton?.image = UIImage(named: "icon_default.png")
+        closeButton?.image = loadImageFromResourceBundle(named: "icon_default.png")
         webView?.stopLoading()
         webView?.uiDelegate = nil
         webView?.navigationDelegate = nil
@@ -336,6 +340,15 @@ public class ChopraLoginViewController: UIViewController {
         }
         
         return randomString;
+    }
+    
+    private func loadImageFromResourceBundle(named imageName: String) -> UIImage? {
+        guard let bundleUrl = Bundle(for: ChopraLoginViewController.self).url(forResource: "ChopraSSO", withExtension: "bundle") else {
+            return nil
+        }
+        
+        let bundle = Bundle(url: bundleUrl)
+        return UIImage(named: imageName, in: bundle, compatibleWith: nil)
     }
 }
 
