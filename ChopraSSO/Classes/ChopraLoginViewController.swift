@@ -307,8 +307,9 @@ public class ChopraLoginViewController: UIViewController {
                 return nil
         }
         
-        cKey.popLast()
-        cData.popLast()
+        // Pop \0 character, because it messes up the encoding
+        let _ = cKey.popLast()
+        let _ = cData.popLast()
         
         var ucKey: Array<UInt8> = []
         var ucData: Array<UInt8> = []
