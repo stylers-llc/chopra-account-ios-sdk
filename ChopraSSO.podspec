@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ChopraSSO'
-  s.version          = '2.0.1'
-  s.summary          = 'A short description of ChopraSSO.'
+  s.version          = '2.1.0'
+  s.summary          = 'Chopra Login SSO for iOS.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,20 +18,20 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+Chopra Login SSO for iOS.
                        DESC
 
-  s.homepage         = 'https://github.com/encosw/ChopraSSO'
+  s.homepage         = 'https://github.com/stylers-llc/chopra-account-ios-sdk'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'encosw' => 'kovacs.ors@encosoft.hu' }
-  s.source           = { :git => 'https://github.com/encosw/ChopraSSO.git', :tag => s.version.to_s }
+  s.author           = { 'Stylers USA LLC' => 'ors.kovacs@stylersonline.com' }
+  s.source           = { :git => 'https://github.com/stylers-llc/chopra-account-ios-sdk.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '8.0'
 
   s.source_files = 'ChopraSSO/Classes/**/*.swift'
-  
+
   s.resource_bundles = {
     'ChopraSSO' => ['ChopraSSO/Assets/*.png']
   }
@@ -43,7 +43,7 @@ TODO: Add long description of the pod here.
     s.dependency 'FBSDKCoreKit', '<= 4.34.0'
     s.dependency 'FBSDKLoginKit', '<= 4.34.0'
     s.dependency 'GoogleSignIn', '<= 4.1.2'
-    s.dependency 'CryptoSwift', '<= 0.8.3'
-    s.dependency 'SwiftyJSON', '<= 4.1'
+    s.dependency 'CryptoSwift', '<= 0.13.1'
+    s.dependency 'SwiftyJSON', '<= 4.2'
 
 end

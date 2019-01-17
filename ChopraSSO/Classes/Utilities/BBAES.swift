@@ -44,7 +44,7 @@ class BBAES {
             encryptedData = data.subdata(in: ivLength..<data.count)
         }
 
-        guard let decryptor: AES = try? AES(key: Array<UInt8>(key), blockMode: BlockMode.CBC(iv: Array<UInt8>(checkedIv)), padding: Padding.pkcs7),
+        guard let decryptor: AES = try? AES(key: Array<UInt8>(key), blockMode: CBC(iv: Array<UInt8>(checkedIv)), padding: Padding.pkcs7),
             let decryptedData = try? decryptor.decrypt(Array<UInt8>(encryptedData))
             else {
             return nil

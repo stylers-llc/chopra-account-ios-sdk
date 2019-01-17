@@ -16,7 +16,7 @@ public final class ChopraSSO {
         GoogleHelper.shared.clientId = newId
     }
     
-    public static func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+    public static func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         return GoogleHelper.shared.application(app, open: url, options: options)
             || FacebookHelper.shared.application(app, open: url, options: options)
     }

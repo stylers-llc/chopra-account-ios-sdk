@@ -27,9 +27,9 @@ class GoogleHelper: NSObject, SocialHelper, GIDSignInDelegate, GIDSignInUIDelega
         GIDSignIn.sharedInstance().uiDelegate = self
     }
     
-    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
         if #available(iOS 9.0, *) {
-            return GIDSignIn.sharedInstance().handle(url, sourceApplication: options[UIApplicationOpenURLOptionsKey.sourceApplication] as! String, annotation: options[UIApplicationOpenURLOptionsKey.annotation])
+            return GIDSignIn.sharedInstance().handle(url, sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as! String, annotation: options[UIApplication.OpenURLOptionsKey.annotation])
         } else {
             var optionsCopy = options
             let annotation: Any = optionsCopy.popFirst()?.value ?? 0
