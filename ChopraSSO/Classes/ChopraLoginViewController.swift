@@ -140,6 +140,7 @@ public class ChopraLoginViewController: UIViewController {
                         }
                     } else {
                         print("\nCannot convert data to a dictionary\n")
+                        completionHandler(nil)
                     }
                 }
                 print(String(format: "Request reply: %@", response ?? "unknown"))
@@ -166,6 +167,31 @@ public class ChopraLoginViewController: UIViewController {
         }
     }
     
+    func hasNotch() -> Bool {
+        if UIDevice().userInterfaceIdiom == .phone {
+            switch UIScreen.main.nativeBounds.height {
+            case 1136:
+                print("iPhone 5 or 5S or 5C")
+            case 1334:
+                print("iPhone 6/6S/7/8")
+            case 1920, 2208:
+                print("iPhone 6+/6S+/7+/8+")
+            case 2436:
+                print("iPhone X, XS")
+                return true
+            case 2688:
+                print("iPhone XS Max")
+                return true
+            case 1792:
+                print("iPhone XR")
+                return true
+            default:
+                print("Unknown")
+            }
+        }
+        return false
+    }
+    
     // MARK: - Lifecycle
     
     override public func viewDidLoad() {
@@ -173,16 +199,19 @@ public class ChopraLoginViewController: UIViewController {
         
         view.backgroundColor = .clear
         
-        contentView = UIView(frame: CGRect(x: view.frame.origin.x + 15, y: view.frame.origin.y + 35, width: view.frame.width - 30, height: view.frame.height - 50))
+        let topConstaint: CGFloat = hasNotch() ? 55 : 35
+        let bottomConstaint: CGFloat = hasNotch() ? 35 : 20
+
+        contentView = UIView(frame: CGRect(x: view.frame.origin.x + 15, y: view.frame.origin.y + topConstaint, width: view.frame.width - 30, height: view.frame.height - topConstaint - bottomConstaint))
         contentView?.backgroundColor = .white
         view.addSubview(contentView!)
         
-        webView = WKWebView(frame: CGRect(x: view.frame.origin.x + 15, y: view.frame.origin.y + 35, width: view.frame.width - 30, height: view.frame.height - 50), configuration: WKWebViewConfiguration())
+        webView = WKWebView(frame: CGRect(x: view.frame.origin.x + 15, y: view.frame.origin.y + topConstaint, width: view.frame.width - 30, height: view.frame.height - topConstaint - bottomConstaint), configuration: WKWebViewConfiguration())
         webView?.scrollView.bounces = false
         view.addSubview(webView!)
         
         closeButton = UIImageView(image: loadImageFromResourceBundle(named: "icon_default.png") , highlightedImage: loadImageFromResourceBundle(named: "icon_pressed.png"))
-        closeButton?.frame = CGRect(x: view.frame.origin.x + 5, y: view.frame.origin.y + 25, width: 30, height: 30)
+        closeButton?.frame = CGRect(x: view.frame.origin.x + 5, y: view.frame.origin.y + topConstaint - 15, width: 30, height: 30)
         closeButton?.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(closeButtonTouch)))
         closeButton?.isMultipleTouchEnabled = true
         closeButton?.isUserInteractionEnabled = true
