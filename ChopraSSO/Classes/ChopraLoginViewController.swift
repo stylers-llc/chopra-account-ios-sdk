@@ -392,6 +392,13 @@ extension ChopraLoginViewController: GIDSignInUIDelegate {
 
 extension ChopraLoginViewController: WKNavigationDelegate, WKUIDelegate {
     
+    public func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
+        if navigationAction.targetFrame == nil {
+            webView.load(navigationAction.request)
+        }
+        return nil
+    }
+    
     public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         webView.isHidden = false
         activityIndicator?.stopAnimating()
