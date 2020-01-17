@@ -218,7 +218,7 @@ public class ChopraLoginViewController: UIViewController {
         view.addSubview(closeButton!)
         
         activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
-        activityIndicator?.activityIndicatorViewStyle = .gray
+        activityIndicator?.style = .gray
         activityIndicator?.hidesWhenStopped = true
         activityIndicator?.startAnimating()
         view.addSubview(activityIndicator!)
@@ -305,7 +305,7 @@ public class ChopraLoginViewController: UIViewController {
         
         guard let clientSecret = clientSecret,
             let message = serializedString.data(using: .utf8), let encryptedTokenData = try? (try? AES(key: Array(clientSecret.utf8), blockMode: CBC(iv: Array(ivString.utf8))))?.encrypt(Array(message)),
-            let encryptedTokenString = encryptedTokenData?.toBase64() else {
+            let encryptedTokenString = encryptedTokenData.toBase64() else {
                 
             return nil
         }
