@@ -36,6 +36,7 @@ class FacebookHelper: SocialHelper {
                     self.returnUserData(completionHandler: completionHandler)
                 } else {
                     completionHandler(false, nil, nil)
+                    self.loginManager.logOut()
                 }
             }
         }
@@ -46,12 +47,15 @@ class FacebookHelper: SocialHelper {
         let _ = me.start(completionHandler: { (connection, result, error) in
             if let _ = error {
                 completionHandler(false, nil, nil)
+                self.loginManager.logOut()
             } else if let result = result as? [String : AnyObject] {
                 let id = result["id"]
                 let token = AccessToken.current?.tokenString
                 completionHandler(true, id as? String, token)
+                self.loginManager.logOut()
             } else {
                 completionHandler(false, nil, nil)
+                self.loginManager.logOut()
             }
         })
     }

@@ -56,7 +56,7 @@ class ViewController: UIViewController {
         let chopra = ChopraLoginViewController()
         
         chopra.setLoginBaseUrl(ServerProxyConstants.authUrl, apiUrl: ServerProxyConstants.authApiUrl, apiKey: ServerProxyConstants.authApiKey, clientKey: ServerProxyConstants.clientKey, platform: ServerProxyConstants.authPlatform, nameSpace: ServerProxyConstants.namespace, clientSecret: ServerProxyConstants.clientSecret)
-        
+
         chopra.loginWithEmail(from: self) { (uId, uToken) -> Void in
             chopra.getChopraAccount(uToken, completionHandler: { (chopraAccount) -> Void in
                 if let acc = chopraAccount {

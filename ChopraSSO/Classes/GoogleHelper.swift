@@ -7,7 +7,7 @@
 
 import GoogleSignIn
 
-class GoogleHelper: NSObject, GIDSignInDelegate {
+class GoogleHelper: NSObject, SocialHelper, GIDSignInDelegate {
     
     static var shared: GoogleHelper = GoogleHelper()
     
