@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'ChopraSSO'
-  s.version          = '3.0.0'
+  s.version          = '3.1.0'
   s.summary          = 'Chopra Login SSO for iOS.'
 
 # This description is used to generate tags and improve search results.
@@ -40,9 +40,9 @@ Chopra Login SSO for iOS.
     s.frameworks = 'UIKit', 'Foundation'
     s.static_framework = true
 
-    s.dependency 'FBSDKCoreKit', '<= 4.34.0'
-    s.dependency 'FBSDKLoginKit', '<= 4.34.0'
-    s.dependency 'GoogleSignIn', '<= 4.1.2'
+    s.dependency 'FBSDKCoreKit', '<= 5.14.0'
+    s.dependency 'FBSDKLoginKit', '<= 5.14.0'
+    s.dependency 'GoogleSignIn', '<= 5.0.2'
     s.dependency 'CryptoSwift', '<= 0.13.1'
     s.dependency 'SwiftyJSON', '<= 4.2'
 

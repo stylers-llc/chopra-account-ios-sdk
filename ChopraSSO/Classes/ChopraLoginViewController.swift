@@ -305,7 +305,7 @@ public class ChopraLoginViewController: UIViewController {
         
         guard let clientSecret = clientSecret,
             let message = serializedString.data(using: .utf8), let encryptedTokenData = try? (try? AES(key: Array(clientSecret.utf8), blockMode: CBC(iv: Array(ivString.utf8))))?.encrypt(Array(message)),
-            let encryptedTokenString = encryptedTokenData?.toBase64() else {
+            let encryptedTokenString = encryptedTokenData.toBase64() else {
                 
             return nil
         }
@@ -386,9 +386,9 @@ extension ChopraLoginViewController: URLSessionDelegate {
     
 }
 
-extension ChopraLoginViewController: GIDSignInUIDelegate {
-    
-}
+//extension ChopraLoginViewController: GIDSignInUIDelegate {
+//    
+//}
 
 extension ChopraLoginViewController: WKNavigationDelegate, WKUIDelegate {
     

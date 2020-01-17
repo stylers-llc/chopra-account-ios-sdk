@@ -17,12 +17,12 @@ public final class ChopraSSO {
     }
     
     public static func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        return GoogleHelper.shared.application(app, open: url, options: options)
+        return GoogleHelper.shared.application(open: url)
             || FacebookHelper.shared.application(app, open: url, options: options)
     }
     
     public static func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
-        return GoogleHelper.shared.application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
+        return GoogleHelper.shared.application(open: url)
             || FacebookHelper.shared.application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
     }
 }

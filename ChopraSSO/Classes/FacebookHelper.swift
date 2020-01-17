@@ -13,46 +13,49 @@ class FacebookHelper: SocialHelper {
     
     var clientId: String?
     
-    var loginManager: FBSDKLoginManager
+    var loginManager: LoginManager
     
     init() {
-        self.loginManager = FBSDKLoginManager()
-        loginManager.loginBehavior = FBSDKLoginBehavior.systemAccount
+        self.loginManager = LoginManager()
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        return FBSDKApplicationDelegate.sharedInstance().application(app, open: url, options: options)
+        return ApplicationDelegate.shared.application(app, open: url, options: options)
     }
     
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
-        return FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
+        return ApplicationDelegate.shared.application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
     }
     
     func login(from rootViewController: UIViewController, withHandler completionHandler: @escaping ((Bool, String?, String?) -> Void)) {
-        if let _ = FBSDKAccessToken.current() {
+        if let _ = AccessToken.current {
             self.returnUserData(completionHandler: completionHandler)
         } else {
-            self.loginManager.logIn(withReadPermissions: [], from: rootViewController) { (loginResult, error) in
+            self.loginManager.logIn(permissions: [], from: rootViewController) { (loginResult, error) in
                 if let loginResult = loginResult, !loginResult.isCancelled {
                     self.returnUserData(completionHandler: completionHandler)
                 } else {
                     completionHandler(false, nil, nil)
+                    self.loginManager.logOut()
                 }
             }
         }
     }
     
     func returnUserData(completionHandler: @escaping ((Bool, String?, String?) -> Void)) {
-        let me = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id"])
-        let _ = me?.start(completionHandler: { (connection, result, error) in
+        let me = GraphRequest(graphPath: "me", parameters: ["fields": "id"])
+        let _ = me.start(completionHandler: { (connection, result, error) in
             if let _ = error {
                 completionHandler(false, nil, nil)
+                self.loginManager.logOut()
             } else if let result = result as? [String : AnyObject] {
                 let id = result["id"]
-                let token = FBSDKAccessToken.current().tokenString
+                let token = AccessToken.current?.tokenString
                 completionHandler(true, id as? String, token)
+                self.loginManager.logOut()
             } else {
                 completionHandler(false, nil, nil)
+                self.loginManager.logOut()
             }
         })
     }

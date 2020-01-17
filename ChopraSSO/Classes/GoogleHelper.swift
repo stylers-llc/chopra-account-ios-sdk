@@ -7,7 +7,7 @@
 
 import GoogleSignIn
 
-class GoogleHelper: NSObject, SocialHelper, GIDSignInDelegate, GIDSignInUIDelegate {
+class GoogleHelper: NSObject, SocialHelper, GIDSignInDelegate {
     
     static var shared: GoogleHelper = GoogleHelper()
     
@@ -24,30 +24,19 @@ class GoogleHelper: NSObject, SocialHelper, GIDSignInDelegate, GIDSignInUIDelega
     override init() {
         super.init()
         GIDSignIn.sharedInstance().delegate = self
-        GIDSignIn.sharedInstance().uiDelegate = self
     }
     
-    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        if #available(iOS 9.0, *) {
-            return GIDSignIn.sharedInstance().handle(url, sourceApplication: options[UIApplication.OpenURLOptionsKey.sourceApplication] as! String, annotation: options[UIApplication.OpenURLOptionsKey.annotation])
-        } else {
-            var optionsCopy = options
-            let annotation: Any = optionsCopy.popFirst()?.value ?? 0
-            let sourceApplication: String = optionsCopy.popFirst()?.value as? String ?? ""
-            return application(app, open: url, sourceApplication: sourceApplication, annotation: annotation)
-        }
-    }
-    
-    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
-        return GIDSignIn.sharedInstance().handle(url, sourceApplication: sourceApplication, annotation: annotation)
+    func application(open url: URL) -> Bool {
+        return GIDSignIn.sharedInstance()?.handle(url) ?? false
     }
     
     func login(from rootViewController: UIViewController, withHandler completionHandler: @escaping ((Bool, String?, String?) -> Void)) {
+        GIDSignIn.sharedInstance()?.presentingViewController = rootViewController
         self.rootViewController = rootViewController
         self.completionHandler = completionHandler
         
         self.isSilent = true
-        GIDSignIn.sharedInstance().signInSilently()
+        GIDSignIn.sharedInstance()?.restorePreviousSignIn()
     }
     
     // MARK: - GIDSignInDelegate
@@ -68,26 +57,5 @@ class GoogleHelper: NSObject, SocialHelper, GIDSignInDelegate, GIDSignInUIDelega
             self.completionHandler = nil
             GIDSignIn.sharedInstance().signOut()
         }
-    }
-    
-    // MARK: - GIDSignInUIDelegate
-    
-    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
-        if self.isSilent {
-            self.isSilent = false
-            GIDSignIn.sharedInstance().signIn()
-        } else {
-            self.completionHandler?(false, nil, nil)
-            self.completionHandler = nil
-        }
-    }
-    
-    func sign(_ signIn: GIDSignIn!, present viewController: UIViewController!) {
-        self.rootViewController?.present(viewController, animated: true, completion: nil)
-    }
-    
-    func sign(_ signIn: GIDSignIn!, dismiss viewController: UIViewController!) {
-        viewController.dismiss(animated: true, completion: nil)
-        self.rootViewController = nil
     }
 }
