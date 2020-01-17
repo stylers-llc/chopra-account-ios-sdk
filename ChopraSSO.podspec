@@ -42,7 +42,7 @@ Chopra Login SSO for iOS.
 
     s.dependency 'FBSDKCoreKit', '<= 5.14.0'
     s.dependency 'FBSDKLoginKit', '<= 5.14.0'
-    s.dependency 'GoogleSignIn', '<= 5.0.2' #, '<= 4.1.2'
+    s.dependency 'GoogleSignIn', '<= 5.0.2'
     s.dependency 'CryptoSwift', '<= 0.13.1'
     s.dependency 'SwiftyJSON', '<= 4.2'
 
