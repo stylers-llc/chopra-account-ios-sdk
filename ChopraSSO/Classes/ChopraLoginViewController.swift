@@ -218,7 +218,7 @@ public class ChopraLoginViewController: UIViewController {
         view.addSubview(closeButton!)
         
         activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
-        activityIndicator?.style = .gray
+        activityIndicator?.activityIndicatorViewStyle = .gray
         activityIndicator?.hidesWhenStopped = true
         activityIndicator?.startAnimating()
         view.addSubview(activityIndicator!)
@@ -386,9 +386,9 @@ extension ChopraLoginViewController: URLSessionDelegate {
     
 }
 
-extension ChopraLoginViewController: GIDSignInUIDelegate {
-    
-}
+//extension ChopraLoginViewController: GIDSignInUIDelegate {
+//    
+//}
 
 extension ChopraLoginViewController: WKNavigationDelegate, WKUIDelegate {
     
